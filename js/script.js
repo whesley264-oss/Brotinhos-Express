@@ -20,11 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const itemName = menuItem.querySelector('h3').textContent;
             const itemPrice = menuItem.querySelector('.price').textContent;
 
-            // Armazena os dados da pizza no modal
             pizzaNameInput.value = itemName;
             pizzaPriceInput.value = itemPrice;
 
-            customizationModal.style.display = 'block';
+            customizationModal.classList.add('active'); // Usa classe para ativar
         });
     });
 
@@ -33,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const size = document.querySelector('input[name="size"]:checked').value;
         const crust = document.querySelector('input[name="crust"]:checked').value;
 
-        // Calcula o preço final
         let finalPrice = parseFloat(pizzaPriceInput.value.replace('R$', '').replace(',', '.'));
         if (crust === 'recheada') {
             finalPrice += 5;
@@ -46,27 +44,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cart.push(item);
         updateCart();
-        customizationModal.style.display = 'none';
+        customizationModal.classList.remove('active'); // Usa classe para desativar
     });
 
     // --- Lógica do Carrinho de Compras (Modal) ---
     cartButton.addEventListener('click', () => {
-        cartModal.style.display = 'block';
         renderCartItems();
+        cartModal.classList.add('active'); // Usa classe para ativar
     });
 
     // --- Lógica para fechar os modais ---
     closeButtons.forEach(button => {
         button.addEventListener('click', () => {
-            cartModal.style.display = 'none';
-            customizationModal.style.display = 'none';
+            cartModal.classList.remove('active');
+            customizationModal.classList.remove('active');
         });
     });
 
     window.addEventListener('click', (event) => {
         if (event.target == cartModal || event.target == customizationModal) {
-            cartModal.style.display = 'none';
-            customizationModal.style.display = 'none';
+            cartModal.classList.remove('active');
+            customizationModal.classList.remove('active');
         }
     });
 

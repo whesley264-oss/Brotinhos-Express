@@ -52,6 +52,11 @@ header nav ul li a {
     text-decoration: none;
     color: var(--dark-text);
     font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    color: var(--primary-color);
 }
 
 header .cart button {
@@ -108,7 +113,52 @@ header .cart button {
     text-align: left;
     outline: none;
     font-size: 15px;
-    transition: 0.4s;
+    transition: background-color 0.4s;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-question.active, .faq-question:hover {
+    background-color: #ddd;
+}
+
+.faq-icon {
+    width: 1.2em;
+    height: 1.2em;
+    position: relative;
+}
+
+.faq-icon::before, .faq-icon::after {
+    content: '';
+    position: absolute;
+    background-color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+.faq-icon::before {
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    margin-top: -1px;
+}
+
+.faq-icon::after {
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    margin-left: -1px;
+}
+
+.faq-question.active .faq-icon::after {
+    transform: rotate(90deg);
+}
+
+.faq-question.active .faq-icon::before {
+    transform: rotate(180deg);
 }
 
 .faq-answer {
@@ -127,23 +177,38 @@ footer {
 }
 
 .modal {
-    display: none;
+    visibility: hidden; /* Começa invisível */
+    opacity: 0; /* Começa transparente */
     position: fixed;
-    z-index: 1;
+    z-index: 10;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0.5);
+    transition: visibility 0.3s, opacity 0.3s ease;
+}
+
+.modal.active {
+    visibility: visible;
+    opacity: 1;
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
+    margin: 10% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    transform: translateY(-50px);
+    transition: transform 0.3s ease;
+}
+
+.modal.active .modal-content {
+    transform: translateY(0);
 }
 
 .close-button {
@@ -326,4 +391,39 @@ footer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
+}
+
+/* --- Efeitos de Animação e Interatividade --- */
+
+/* Efeito geral para botões e links .btn */
+button, .btn {
+    transition: all 0.3s ease;
+}
+
+button:hover, .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Efeito específico para botões com cor primária */
+header .cart button:hover,
+.menu-item .add-to-cart:hover,
+#checkout:hover,
+#add-to-cart-customized:hover {
+    background-color: #e65c00; /* Tom mais escuro do laranja */
+}
+
+/* Efeito para o botão do hero (fundo branco) */
+#hero .btn:hover {
+    background-color: #f2f2f2; /* Cinza bem claro */
+}
+
+/* Efeito para os cards de produtos */
+.menu-item {
+    transition: all 0.3s ease;
+}
+
+.menu-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
