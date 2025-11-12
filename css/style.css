@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 :root {
     --primary-color: #ff6600;
     --dark-text: #333;
@@ -55,7 +59,8 @@ header nav ul li a {
     transition: color 0.3s ease;
 }
 
-header nav ul li a:hover {
+header nav ul li a:hover,
+header nav ul li a.active-link {
     color: var(--primary-color);
 }
 
@@ -426,4 +431,35 @@ header .cart button:hover,
 .menu-item:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Botão Voltar ao Topo */
+#back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--primary-color);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 24px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 5;
+}
+
+#back-to-top.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+#back-to-top:hover {
+    background-color: #e65c00;
+    transform: translateY(-5px);
 }
